@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>Second task</title>
+	</head>
+	<style type="text/css">
+		h1{color:blue;}
+		h2{color: #fff; font-size:18px;}
+	    h3{color:blue; font-size:14px;}
+		.main{background: #111191; border: 1px solid blue; padding:10px;margin:3px;}
+		#container1, #container2, #psection, #ssection{background:lightblue; border: 1px solid blue; padding:10px;margin:3px;}
+		label, span, button{color:#fff; font-size:16px;}
+		input, p{color:#009; font-size:16px;}
+	</style>
+	<body>
+		<h1>Exercise 2 from OOP</h1>
+		
+		<div>
+			<div class="main">
+			<h2>Main section with the names of the students and their parents:</h2>
+				<div  id="container1" >
+						<div>
+							<h3>Student's details:</h3>
+								<label for="first name" >First name:</label>
+								<input type="text" id = "st1fname" value="Ivan"/> 
+								<label for="last name" >Last name:</label>
+								<input type="text" id="st1lname" value="Ivanov"/> 
+								<label for="school" >School:</label>
+								<input type="text" id = "school1" value="PMG"/> 
+						</div>
+						<div id="ivansm">
+							<h3>Subjects and marks:</h3>
+								<label for="mathematicsgrade" >Mathematics:</label>
+								<input type="text"  id="math1" value="4"/>
+								<label for="englishgrade">English:</label>
+								<input type="text" id="eng1" value="5"/>
+								<label for="sportgrade">Sport:</label>
+								<input type="text" id="sport1" value="4"/><br />
+								<label for="new subject">Add new Subject:</label>
+								<input type="text" id="st1newsub"/>
+								<label for="new mark">Add new mark:</label>
+								<input type="text" id="st1newmark" />
+								<button type="submit" id="st1addingsm" onclick="ivan.addSM(st1NewS, st1NewM)">Add Subject and mark</button><br />
+								<label for="delete subject">Delete Subject and it's mark:</label>
+								<input type="text" id="st1dsub"/>
+								<button type="button" id="st1deletesm" onclick="ivan.removeSM(st1DeleteS)">Delete subject and it's mark</button>
+								
+								
+						</div>
+						<div >
+							<h3>Parent's details:</h3>
+								<label for="first name">First name:</label>
+								<input type="text" id="pfname" value="Dragan"/> 
+								<label for="last name">Last name:</label>
+								<input type="text" id="plname" value="Ivanov"/> 
+								
+						</div>
+				</div>				
+				<div  id="container2" >
+						<div>
+							<h3>Student's details:</h3>
+								<label for="first name" >First name:</label>
+								<input type="text" id = "st2fname" value="Petkan"/> 
+								<label for="last name" >Last name:</label>
+								<input type="text" id="st2lname" value="Ivanov"/> 
+								<label for="school" >School:</label>
+								<input type="text" id = "school2" value="PMG"/> 
+						</div>
+						<div id="petkansm">
+							<h3>Subjects and marks:</h3>
+								<label for="mathematicsgrade" >Mathematics:</label>
+								<input type="text"  id="math2" value="4"/>
+								<label for="englishgrade">English:</label>
+								<input type="text" id="eng2" value="6"/>
+								<label for="sportgrade">Sport:</label>
+								<input type="text" id="sport2" value="2"/> <br />
+								<label for="new subject">Add new Subject:</label>
+								<input type="text" id="st2newsub"/>
+								<label for="new mark">Add new mark:</label>
+								<input type="text" id="st2newmark" />
+								<button type="submit" id="st2addingsm" onclick="petkan.addSM(st2NewS, st2NewM)">Add Subject and mark</button><br />
+								<label for="delete subject">Delete Subject and it's mark:</label>
+								<input type="text" id="st2dsub"/>
+								<button id="st2deletesm" onclick="petkan.removeSM(st2DeleteS)">Delete subject and it's mark</button>
+								
+								
+						</div>
+						<div >
+							<h3>Parent's details:</h3>
+								<label for="first name">First name:</label>
+								<input type="text" id="pfname" value="Dragan"/> 
+								<label for="last name">Last name:</label>
+								<input type="text" id="plname" value="Ivanov"/> 
+						
+						</div>
+				</div>
+			</div>
+			<!--Section for Parents-->
+			<div id="psection">
+				<h2>Parent's section:</h2>
+				<label for="">Search for student to see his/her details:</label> <br />
+				<span>Enter Student's first name:</span><input type="text" id="sfnsearch"/>
+				<button id="ssearch" onclick="stData()">Get Student's marks</button>
+				<div id="dataplace">
+				
+				
+				</div>
+			</div>
+			<!--Section for Students-->
+			<div id="ssection" >
+				<h2>Student's section:</h2>
+				<label for="">Search for parent to see what he/she says to you:</label> <br />
+				<span>Enter Your first name:</span><input type="text" id="yfnsearch"/>
+				<input type ="submit" id="pwords" value="Get Parent's words to you"/>
+			</div>
+		</div>	
+		
+		<script type="text/javascript">
+		/* E2: Implement classes Student and Parent inheriting the Human class. A  Student should have: State holding where s/he studies,
+		a list of his/her marks. A method to count the avarage of their marks.A method for adding/removing a mark. A  Parent should hold
+		a list of all his children(Student objects) and a method to yell at a concrete of his children. 
+			*/// ->>
+		
+								
+			var st1AddSM = document.getElementById("st1addingsm");//button
+			var st2AddSM = document.getElementById("st2addingsm");//button
+			var st1DeleteSM = document.getElementById("st1deletesm");//button
+			var st2DeleteSM = document.getElementById("st2deletesm");//button
+			var stSearch = document.getElementById("ssearch");//button
+			var pWords = document.getElementById("pwords");//button
+			
+	
+			
+			var st1NewS = document.getElementById("st1newsub").value;
+			var st1NewM = parseInt(document.getElementById("st1newmark").value);
+			var st2NewS = document.getElementById("st2newsub").value;
+			var st2NewM = parseInt(document.getElementById("st2newmark").value);
+			
+			var st1DeleteS = document.getElementById("st1dsub").value;
+			var st2DeleteS = document.getElementById("st2dsub").value;
+	
+		
+			
+				function Human(fname,lname){
+				
+				 this.fname = fname;
+				 this.lname=lname;
+				 
+				}
+				
+				var Student = function(fname, lname, school, math, eng, sp ){
+					Human.apply(this,arguments);
+					this.school = school;
+					this.grades={
+						Mathematics: math,
+						English: eng,
+						Sport:sp
+						
+
+					};
+					this.addSM = function(newSubj, newMark){
+										
+						this.grades[newSubj]=newMark;
+						
+					}
+					
+					this.removeSM = function(delSubj){
+						
+						delete this.grades[delSubj];
+					}
+					
+					this.calculateAverageGrade = function(grades){
+						var i;
+						var sumGrades=0;
+						var length=0;
+						var averageGrade;
+						for ( i in this.grades){
+							sumGrades+=this.grades[i];
+							length++;
+						}
+						averageGrade=sumGrades/length;
+						return averageGrade;
+					};
+									
+				}
+				Student.prototype=new Human();
+				
+				var Parent= function(fname, lname, ingoodr, inbadr, Student){
+					this.students = Student;
+					this.words = {
+						ingoodr: ingoodr,
+						inbadr: inbadr
+					};
+					
+					this.yell = function(Student){
+						if(Student.calculateAverageGrade()>4){
+						alert(this.words.ingoodr);
+						}else
+							alert(this.words.inbadr);
+					}
+				}
+				
+				
+				Parent.prototype = new Human();	
+				
+
+				
+				//code for parent's section:
+				function stData(){
+				
+						var stNSearch = document.getElementById("sfnsearch").value;
+						var dataPlace = document.getElementById("dataplace");
+						
+					var key;
+					if(stNSearch === "Ivan"){
+						p1=document.createElement('p');
+						p1.innerHTML = "Ivan Ivanov's marks:";
+						dataPlace.appendChild(p1);
+						if(st1NewS!==""&&st1NewM!=="")
+						ivan.addSM(st1NewS, st1NewM);
+						if(st1DeleteS!=="")
+						ivan.removeSM(st1DeleteS);
+						for(key in ivan.grades){
+						
+							p=document.createElement('p');
+							p.id="data"+key;
+							p.innerHTML = key + " : " + ivan.grades[key];
+							dataPlace.appendChild(p);
+						}
+						p2=document.createElement('p');
+						p2.innerHTML= "The Grade : " + ivan.calculateAverageGrade();
+						dataPlace.appendChild(p2);
+						
+					}
+					else if(stNSearch === "Petkan"){
+						p1=document.createElement('p');
+						p1.innerHTML = "Petkan Ivanov's marks:";
+						dataPlace.appendChild(p1);
+						if(st2NewS!==""&&st2NewM!=="")
+						petkan.addSM(st2NewS, st2NewM);
+						if(st2DeleteS!=="")
+						petkan.removeSM(st2DeleteS);
+						for(key in petkan.grades){
+						
+							p=document.createElement('p');
+							p.id="data"+key;
+							p.innerHTML = key + " : " + petkan.grades[key];
+							dataPlace.appendChild(p);
+							
+						}
+						p2=document.createElement('p');
+						p2.innerHTML= "The Grade : " + petkan.calculateAverageGrade();
+						dataPlace.appendChild(p2);
+					}
+					else{
+						p1=document.createElement('p');
+						p1.innerHTML = "Error! Enter valid name.";
+						dataPlace.appendChild(p1);
+						
+						
+					}
+				}
+				
+				
+				var ivan = new Student("Ivan", "Ivanov", "PMG", 4, 5, 4);
+				var petkan = new Student("Petkan", "Ivanov", "PMG", 4, 6, 2);
+				
+				
+		
+				
+				
+				//code for student's section:
+				var dragan = new Parent("Petkan", "Ivanov", "Well done!", "You must study more!", ivan, petkan);
+				
+				
+				pWords.addEventListener('click', function(){
+				var StNameToYell = document.getElementById("yfnsearch").value;
+					if(StNameToYell==="Ivan"){
+						return dragan.yell(ivan);
+					}
+					else if(StNameToYell === "Petkan"){
+					
+						return dragan.yell(petkan);
+					}
+					else{
+						alert("Error!Enter valid name.");
+					}
+				}, false);
+				
+
+		</script>
+	</body>
+</html>
